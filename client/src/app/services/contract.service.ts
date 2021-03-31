@@ -28,7 +28,7 @@ export class ContractService {
   
       const abi = contractABI.abi;
       window.web3 = new Web3(this.web3Provider);
-      this.contractInstance = new window.web3.eth.Contract(abi, '0xc220644025ea012fF39347cdAb54892BAd32Dba4');
+      this.contractInstance = new window.web3.eth.Contract(abi, '0x95222C900327Aee78557b3F15dCFCB965a1D5470');
       console.log(this.contractInstance);
       window.ethereum.enable().then(function(res){
         localStorage.setItem('account', res);

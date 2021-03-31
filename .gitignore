@@ -2,3 +2,5 @@ node_modules
 Analisis funcional.*
 build
 client/node_modules
+client/.firebase
+.secret

@@ -61,43 +61,47 @@ export class MainComponent implements OnInit {
 
   private async formatData(data: any) {
     for(var i = 0; i < data[0].length; i++){
-      const datosSorteo = JSON.parse((data[3].split('##')[i]));
       const id = data[0][i];
-      let participaciones = null;
-      let recaudacion= null;
-      if(this.rol == 'anunciante'){
-        participaciones = await this.cs.participaciones(id);
-        recaudacion = data[2][i] ? (participaciones * 0.009).toFixed(4) : (participaciones * 0.045).toFixed(4);
+      if(id != 0){
+        const datosSorteo = JSON.parse((data[3].split('##')[i]));
+        let participaciones = null;
+        let recaudacion= null;
+        if(this.rol == 'anunciante'){
+          participaciones = await this.cs.participaciones(id);
+          recaudacion = data[2][i] ? (participaciones * 0.009).toFixed(4) : (participaciones * 0.045).toFixed(4);
+        }else{
+          participaciones = await this.cs.participacionesUsuario(id);
+        }      
+        const fechas = datosSorteo.fechasExp.split('-');
+        const ganador = data[4][i].toLowerCase();
+        let codigoExp = '';
+        let experienciaCanjeada = false;
+        if(ganador != '0x0000000000000000000000000000000000000000'){
+          codigoExp = await this.cs.codigosExperiencias(i);
+          experienciaCanjeada = await this.cs.experiencias(i, codigoExp);
+        }    
+        const sorteo = {
+          id: id,
+          titulo: datosSorteo.titulo,
+          anunciante: data[1][i],
+          premium: data[2][i],
+          descripcion: datosSorteo.descripcion,
+          fechaInicioExp: fechas[0],
+          fechaFinExp: fechas[1],
+          precioExp: datosSorteo.precioExp,
+          tipo: datosSorteo.tipo,
+          participaciones: participaciones,
+          recaudacion: recaudacion,
+          ganador: ganador,
+          codigoExperiencia: codigoExp.toString(),
+          experienciaCanjeada: experienciaCanjeada ? 'Sí' : 'No',
+          participar: ((data[2][i] && this.saldoPremium > 0) || (!data[2][i] && this.saldoStandard > 0)) && participaciones < 5 ? true : false 
+        };
+        this.sorteos.push(sorteo);
+        console.log(sorteo);
       }else{
-        participaciones = await this.cs.participacionesUsuario(id);
-      }      
-      const fechas = datosSorteo.fechasExp.split('-');
-      const ganador = data[4][i].toLowerCase();
-      let codigoExp = '';
-      let experienciaCanjeada = false;
-      if(ganador != '0x0000000000000000000000000000000000000000'){
-        codigoExp = await this.cs.codigosExperiencias(i);
-        experienciaCanjeada = await this.cs.experiencias(i, codigoExp);
-      }    
-      const sorteo = {
-        id: id,
-        titulo: datosSorteo.titulo,
-        anunciante: data[1][i],
-        premium: data[2][i],
-        descripcion: datosSorteo.descripcion,
-        fechaInicioExp: fechas[0],
-        fechaFinExp: fechas[1],
-        precioExp: datosSorteo.precioExp,
-        tipo: datosSorteo.tipo,
-        participaciones: participaciones,
-        recaudacion: recaudacion,
-        ganador: ganador,
-        codigoExperiencia: codigoExp.toString(),
-        experienciaCanjeada: experienciaCanjeada ? 'Sí' : 'No',
-        participar: ((data[2][i] && this.saldoPremium > 0) || (!data[2][i] && this.saldoStandard > 0)) && participaciones < 5 ? true : false 
-      };
-      this.sorteos.push(sorteo);
-      console.log(sorteo);
+        console.log('Sorteo no autorizado para este anunciante');
+      }
     }
   }
 
