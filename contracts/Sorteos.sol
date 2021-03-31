@@ -52,7 +52,7 @@ contract Sorteos {
     using SafeMath for uint256;
     
     constructor() public{
-        contadorSorteos = 0;
+        contadorSorteos = 1;
     }
     
     function addAnunciante( string memory _nombreEmpresa) public {
