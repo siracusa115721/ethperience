@@ -1,0 +1,101 @@
+<div *ngIf="!pageLoaded">
+  <mat-card class="spinner-card">
+    <mat-card-content>
+      <div class="spinner">
+        <mat-spinner></mat-spinner>
+        <p class="bold">Cargando...</p>
+      </div>      
+    </mat-card-content>
+  </mat-card>
+</div>
+<div *ngIf="pageLoaded">
+  <mat-toolbar color="custom">
+    <img src="../../assets/images/logo.png" class="logo">
+    <span class="title">Ethperience: Luckily Enjoying</span>    
+  </mat-toolbar>
+  <mat-card class="main-card">
+    <mat-card-header>
+        <div>
+            <mat-card-title>
+                <div>
+                    <div class="opciones">
+                        <button mat-raised-button color="button" class="form-boton" (click)="comprarTokens()" *ngIf="rol==='usuario'">Comprar tokens</button>
+                        <button mat-raised-button color="button" class="form-boton" (click)="registroAnunciante()" *ngIf="rol==='usuario'">Registrarse como anunciante</button>
+                        <button mat-raised-button color="button" class="form-boton" (click)="altaSorteo()" *ngIf="rol==='anunciante'">Dar de alta sorteo</button>
+                        <div class="cabecera-container">
+                          <div class="saldo-container" *ngIf="rol==='usuario'">
+                              <span class="saldo-container">Saldo: </span>
+                              <span class="saldo-container">Standard {{saldoStandard}} </span>
+                              <span class="saldo-container">Premium {{saldoPremium}} </span>
+                          </div> 
+                          <div class="cuenta-container">
+                              <span class="saldo-container">{{account}}</span>
+                          </div>
+                      </div>
+                    </div>
+                    <hr size="3" width="730px" color="#18547F">
+                </div>
+            </mat-card-title>
+        </div>
+    </mat-card-header>
+    <mat-card-content class="sorteosContainer">
+        <div *ngIf="sorteos.length == 0">
+            <img src="../../assets/images/ce-travel.jpg" class="no-sorteo">
+            <p class="error-text" *ngIf="rol==='anunciante'">No tienes sorteos dados de alta de momento</p>
+            <p class="error-text" *ngIf="rol==='usuario'">No existen sorteos dados de alta de momento</p>
+        </div>
+      <div *ngFor="let sorteo of sorteos; let i=id">
+        <mat-card class="sorteo-card">
+            <mat-card-header class="sorteo-header">
+              <mat-card-title>
+                {{sorteo.titulo}}
+              </mat-card-title>
+            </mat-card-header>
+            <img mat-card-image *ngIf="sorteo.tipo==1" src="../../assets/images/montaña.jpg" class="imagen">
+            <img mat-card-image *ngIf="sorteo.tipo==2" src="../../assets/images/ciudad.jpg" class="imagen">
+            <img mat-card-image *ngIf="sorteo.tipo==3" src="../../assets/images/restaurante.jpg" class="imagen">
+            <img mat-card-image *ngIf="sorteo.tipo==4" src="../../assets/images/campo.jpg" class="imagen">
+            <img mat-card-image *ngIf="sorteo.tipo==5" src="../../assets/images/aventura.jpg" class="imagen">
+            <img mat-card-image *ngIf="sorteo.tipo==6" src="../../assets/images/playa.jpg" class="imagen">
+            <mat-card-content class="sorteo-info">
+              <div class="descripcion">
+                <img *ngIf="sorteo.premium" src="../../assets/images/premium.png" class="premium">
+                <p class="sorteo-descripcion">
+                  {{sorteo.descripcion}}
+                </p>
+              </div>
+              <hr size="2" width="550px" color="#18547F">
+              <p class="sorteo-data">
+                  <span class="bold">Fechas de la experiencia: </span>{{sorteo.fechaInicioExp}} - {{sorteo.fechaFinExp}}
+              </p>
+              <p class="sorteo-data">
+                <span class="bold">Precio estimado: </span>{{sorteo.precioExp}} €
+              </p>
+              <p *ngIf="rol==='anunciante'" class="sorteo-data">
+                <span class="bold">Dinero recaudado: </span>{{sorteo.recaudacion}} ETH
+              </p>
+              <p *ngIf="sorteo.premium==='true'" class="sorteo-data">
+                <span class="bold">Este es un sorteo Premium: </span>{{sorteo.recaudacion}} ETH
+              </p>
+              <p *ngIf="rol==='usuario' && sorteo.participaciones > 0" class="sorteo-data">
+                <span class="bold">Participaciones realizadas: </span>{{sorteo.participaciones}} Tokens
+              </p>
+              <div *ngIf="rol==='anunciante' || sorteo.ganador===account" class="sorteo-data">
+                <p *ngIf="sorteo.codigoExperiencia !== ''"><span class="bold">Ganador: </span>{{sorteo.ganador}}</p>
+                <p *ngIf="sorteo.codigoExperiencia !== ''"><span class="bold">Código experiencia: </span>{{sorteo.codigoExperiencia}}</p>
+                <p *ngIf="sorteo.codigoExperiencia !== ''"><span class="bold">Experiencia canjeada: </span>{{sorteo.experienciaCanjeada}}</p>
+                <p *ngIf="rol==='usuario'" class="ganador-bold">Eres el ganador de este sorteo. Podrás canjear tu experiencia en tu destino</p>
+              </div>
+              <div class="botonera-sorteo" *ngIf="rol==='anunciante'">
+                <button mat-raised-button color="sorteobutton" [disabled]="sorteo.recaudacion <= 0 || sorteo.codigoExperiencia !== ''" (click)="finalizarSorteo(sorteo.id, sorteo.recaudacion)">Finalizar sorteo</button>
+                <button mat-raised-button color="sorteobutton" *ngIf="sorteo.codigoExperiencia !== ''" [disabled]="sorteo.experienciaCanjeada==='Sí'" (click)="canjearExperiencia(sorteo.id, sorteo.ganador, sorteo.codigoExperiencia)">Canjear experiencia</button>
+            </div>
+            <div class="botonera" *ngIf="rol==='usuario'">
+                <button [disabled]="!sorteo.participar" mat-raised-button color="final" (click)="participarSorteo(sorteo.id, sorteo.premium, sorteo.participaciones)">Participar</button>         
+            </div>
+            </mat-card-content>
+          </mat-card>         
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>  

@@ -1,0 +1,64 @@
+.main-card{
+    width: 500px;
+    height: fit-content;
+    margin-top: 50px;
+    margin: auto;
+}
+
+.title{
+    text-align: center;
+    font-weight: bold;
+    margin-left: 50px;
+}
+
+.infoContainer{
+    margin-top: 30px;
+}
+
+.form-label{
+    font-size: medium;
+    font-weight: bold;
+}
+
+.form-value{
+    width: 420px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    resize: none;
+    border: none;
+    background: #e8ede8;
+}
+
+.botonera{
+    text-align: center;
+}
+
+.mat-custom{
+    background-color: #18547F;
+    color: white;
+    margin-left: 10px;
+}
+
+.warning{
+    font-weight: bold;
+    background-color: #FCA52F;
+    margin-left: 5px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.close-icon{
+    margin-left: 85px;
+    margin-top: 5px;
+}
+
+.esperando{
+    text-align: center;
+}
+
+.esperando-imagen{
+    width: 150px;
+}

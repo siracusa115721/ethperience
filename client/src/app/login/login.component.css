@@ -1,0 +1,42 @@
+.main-card {
+    margin: auto;
+    margin-top: 110px;
+    width: 690px;
+    height: fit-content;
+}
+
+.title {
+    margin: auto;
+}
+
+.form-text {
+    width: 600px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    resize: none;
+    border: none;
+    background: #e8ede8;
+}
+
+.botonera{
+    margin-left: 40px;
+}
+
+.mat-custom {
+    background-color: #18547F;
+    color: white;
+    width: 605px;
+    height: 60px;
+}
+
+.error-text {
+    width: 600px;
+    background: #e8ede8;
+    color: red;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,23 @@
+<mat-card class="main-card">
+    <mat-card-header>
+      <h1 class="title">Dar por finalizado el sorteo</h1>
+      <mat-icon class="close-icon" (click)="closeDialog()">close</mat-icon>
+    </mat-card-header>
+    <hr size="2" width="400px" color="#18547F">
+    <mat-card-content class="infoContainer" *ngIf="esperandoRespuesta">
+      <div class="esperando">
+        <img src="../../assets/images/progress-icon-gif-20.jpg" class="esperando-imagen">
+        <p>Su solicitud está siendo procesada</p>
+      </div>
+    </mat-card-content> 
+    <mat-card-content class="infoContainer" *ngIf="!esperandoRespuesta">
+      <p class="form-label">Recaudación total del sorteo</p>
+      <p class="form-value">{{recaudacion}} ETH</p> 
+      <p>
+        <span><strong>Atención:</strong> si usted finaliza el sorteo se designará un ganador y no se podrá seguir participando</span>
+      </p>
+    </mat-card-content>
+    <div class="botonera" *ngIf="!esperandoRespuesta">
+      <button mat-raised-button color="custom"(click)="confirmar()">Confirmar</button>
+    </div>
+  </mat-card>

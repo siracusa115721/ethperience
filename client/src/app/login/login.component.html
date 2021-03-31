@@ -1,0 +1,16 @@
+<mat-card class="main-card">
+    <mat-card-header>
+      <div class="title"><mat-card-title>Ethperience Dapp Login</mat-card-title></div>      
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="loginForm">
+        <textarea rows="1" cols="50" formControlName="mnemonic" class="form-text" placeholder="Mnemonic phrase"></textarea>
+        <textarea rows="1" formControlName="password" class="form-text" placeholder="Password"></textarea>
+        <p *ngIf="errorMessage" class="error-text">{{errorMessage}}</p> 
+        <div class="botonera">
+          <button *ngIf="!seed" mat-raised-button type="submit" color="custom" (click)="submitForm(loginForm)">Registrarse</button>
+          <button *ngIf="seed" mat-raised-button type="submit" color="custom" (click)="submitForm(loginForm)">Login</button>
+        </div>              
+      </form>
+    </mat-card-content>
+  </mat-card>

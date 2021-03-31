@@ -1,0 +1,10 @@
+<div>
+    <div *ngIf="!error">
+        <img src="../../assets/images/check.jpg" class="imagen">
+        <p>Transacción completada satisfactoriamente</p>
+    </div>
+    <div *ngIf="error">
+        <img src="../../assets/images/error.jpg" class="imagen">
+        <p>Se ha producido un error a la hora de realizar la acción solicitada</p>
+    </div>
+</div>

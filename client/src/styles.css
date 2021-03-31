@@ -1,0 +1,41 @@
+.main-div {
+    background-color: #e3eef3;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.anunciante-dialog-container .mat-dialog-container{
+    width: 600px;
+    height: fit-content;
+    background: #28acec;
+}
+
+.alta-sorteo-dialog-container .mat-dialog-container{
+    width: 600px;
+    height: fit-content;
+    background: #28acec;
+}
+
+.finalizar-sorteo-dialog-container .mat-dialog-container{
+    width: 600px;
+    height: fit-content;
+    background: #28acec;
+}
+
+.participar-sorteo-dialog-container .mat-dialog-container{
+    width: 600px;
+    height: fit-content;
+    background: #28acec;
+}
+
+.comprar-token-dialog-container .mat-dialog-container{
+    width: 600px;
+    height: fit-content;
+    background: #28acec;
+}
+
+.canejar-experiencia-dialog-container .mat-dialog-container{
+    width: 600px;
+    height: fit-content;
+    background: #28acec;
+}

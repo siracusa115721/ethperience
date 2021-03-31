@@ -1,0 +1,163 @@
+.main-card{
+    width: 500px;
+    height: fit-content;
+    margin-top: 50px;
+    margin: auto;
+}
+
+.title{
+    text-align: center;
+    font-weight: bold;
+    margin-left: 90px;
+}
+
+.date-picker{
+    margin-left: 150px;
+    margin-bottom: 7px;
+}
+
+.infoContainer{
+    margin-top: 20px;
+}
+
+.form-label{
+    font-size: medium;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.form-text{
+    width: 470px;
+    height: 90px;
+    text-align: center;
+    line-height: 30px;
+    margin-left: 10px;
+    margin-bottom: 7px;
+    resize: none;
+    border: none;
+    background: #e8ede8;
+}
+
+.form-title-text{
+    width: 470px;
+    height: 15px;
+    text-align: center;
+    line-height: 15px;
+    margin-left: 10px;
+    margin-bottom: 7px;
+    resize: none;
+    border: none;
+    background: #e8ede8;
+}
+
+.botonera{
+    text-align: center;
+}
+
+.mat-custom{
+    background-color: #18547F;
+    color: white;
+    margin-left: 10px;
+}
+
+.precio-estimado{
+    resize: none;
+    border: none;
+    background: #e8ede8;
+    width: 100px;
+    height: 20px;
+    text-align: center;
+    margin-left: 40px;
+}
+
+.tipo-premium-container{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.tipo-container{
+    margin-right: 10px;
+}
+
+.premium-container{
+    margin-left: 50px;
+}
+
+.premium-check{
+    margin-left: 10px;
+}
+
+.tipo-selector{
+    resize: none;
+    border: none;
+    background: #e8ede8;
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: #18547F;
+}
+  
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+    background-color: #50A3DE !important;
+}
+
+.descripcion-value{
+    width: 470px;
+    height: 90px;
+    text-align: center;
+    line-height: 30px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    border: none;
+    background: #e8ede8;
+}
+
+.descripcion-titulo{
+    width: 470px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    border: none;
+    background: #e8ede8;
+}
+
+.resumen-value{
+    margin-top: 10px;
+    background: #e8ede8;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 470px;
+    margin: auto;
+}
+
+.close-icon{
+    margin-left: 90px;
+    margin-top: 5px;
+}
+
+.error-text{
+    background-color: #f7c3ee;
+    color: red;
+    margin: 5px 5px 5px 5px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.esperando{
+    text-align: center;
+}
+
+.esperando-imagen{
+    width: 150px;
+}

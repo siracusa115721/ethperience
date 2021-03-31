@@ -1,0 +1,26 @@
+<mat-card class="main-card">
+  <mat-card-header>
+    <h1 class="title">Participar en el sorteo</h1>
+    <mat-icon class="close-icon" (click)="closeDialog()">close</mat-icon>
+  </mat-card-header>
+  <hr size="2" width="450px" color="#18547F">
+  <mat-card-content class="infoContainer" *ngIf="paso==1">
+    <p class="form-label">Saldo: {{tokens}} tokens</p>
+    <p class="form-label">Tokens con los que participar (máx. {{maximoTokens}}) </p>
+    <input class="form-value" id="participaciones" type="number" onKeyDown="return false" step="1" min="0" max="{{maximoTokens}}" (change)="actualizarParticipaciones($event)" onKeyDown="return false">
+  </mat-card-content>
+  <mat-card-content class="infoContainer" *ngIf="paso == 2 && esperandoRespuesta">
+    <div class="esperando">
+      <img src="../../assets/images/progress-icon-gif-20.jpg" class="esperando-imagen">
+      <p>Su solicitud está siendo procesada</p>
+    </div>
+  </mat-card-content>
+  <mat-card-content class="infoContainer" *ngIf="paso==2 && !esperandoRespuesta">
+    <p>Vas a participar en el sorteo con un total de {{participaciones}} tokens. Recuerda que puedes participar hasta con 5 tokens</p>
+  </mat-card-content>
+  <div class="botonera" *ngIf="!esperandoRespuesta">
+    <button mat-raised-button color="custom" *ngIf="paso==1" [disabled]="participaciones==0" (click)="paso=2">Siguiente</button>
+    <button mat-raised-button color="custom" *ngIf="paso==2" (click)="paso=1">Volver</button>
+    <button mat-raised-button color="custom" *ngIf="paso==2" (click)="confirmarParticipacion()">Confirmar</button>
+  </div>
+</mat-card>
