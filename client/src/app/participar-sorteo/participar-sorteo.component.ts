@@ -44,6 +44,7 @@ export class ParticiparSorteoComponent implements OnInit {
 
   async confirmarParticipacion(){
     this.esperandoRespuesta = true;
+    console.log('Participando en el sorteo ' + this.id + ' con ' + this.participaciones + ' tokens y es premium: ' + this.premium);
     await this.cs.participar(this.id, this.participaciones, this.premium).then( response => {
       this.esperandoRespuesta = false;
       this.dialogRef.close(response);

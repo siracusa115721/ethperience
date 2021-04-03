@@ -1,14 +1,14 @@
 <mat-card class="main-card">
   <mat-card-header>
     <h1 class="title">Comprar tokens</h1>
-    <mat-icon class="close-icon" (click)="closeDialog()">close</mat-icon>
+    <mat-icon *ngIf="!esperandoRespuesta" class="close-icon" (click)="closeDialog()">close</mat-icon>
   </mat-card-header>
   <hr size="2" width="400px" color="#18547F">
   <mat-card-content class="infoContainer" *ngIf="paso==1">
     <p class="form-label">Token standard ({{factorConversionStandard}} ETH) </p>
-    <input id="token-standard" [disabled]="coste+factorConversionStandard > balance" onKeyDown="return false" type="number" step="1" min="0" (change)="actualizaSaldo(false,$event)" class="form-value">
+    <input id="token-standard" onKeyDown="return false" type="number" step="1" min="0" (change)="actualizaSaldo(false,$event)" class="form-value">
     <p class="form-label">Token premium ({{factorConversionPremium}} ETH)</p>
-    <input id="token-premium" [disabled]="coste+factorConversionPremium > balance" onKeyDown="return false" type="number" step="1" min="0" (change)="actualizaSaldo(true,$event)" class="form-value">
+    <input id="token-premium" onKeyDown="return false" type="number" step="1" min="0" (change)="actualizaSaldo(true,$event)" class="form-value">
     <p class="form-label">Saldo</p>
     <p class="form-value">{{balance}} ETH</p>
     <p class="form-label">Coste </p>
@@ -31,7 +31,7 @@
     <p class="form-value">{{coste}} ETH</p>
   </mat-card-content>
   <div class="botonera">
-    <button mat-raised-button color="custom" *ngIf="paso==1 && !esperandoRespuesta" [disabled]="coste=='0'" (click)="paso=2">Siguiente</button>
+    <button mat-raised-button color="custom" *ngIf="paso==1 && !esperandoRespuesta" [disabled]="coste=='0' || !valido" (click)="paso=2">Siguiente</button>
     <button mat-raised-button color="custom" *ngIf="paso==2 && !esperandoRespuesta" (click)="paso=1">Volver</button>
     <button mat-raised-button color="custom" *ngIf="paso==2 && !esperandoRespuesta" (click)="confirmarCompra()">Confirmar</button>
   </div>

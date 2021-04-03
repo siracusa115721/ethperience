@@ -77,8 +77,8 @@ export class MainComponent implements OnInit {
         let codigoExp = '';
         let experienciaCanjeada = false;
         if(ganador != '0x0000000000000000000000000000000000000000'){
-          codigoExp = await this.cs.codigosExperiencias(i);
-          experienciaCanjeada = await this.cs.experiencias(i, codigoExp);
+          codigoExp = await this.cs.codigosExperiencias(id);
+          experienciaCanjeada = await this.cs.experiencias(id, codigoExp);
         }    
         const sorteo = {
           id: id,
@@ -95,7 +95,7 @@ export class MainComponent implements OnInit {
           ganador: ganador,
           codigoExperiencia: codigoExp.toString(),
           experienciaCanjeada: experienciaCanjeada ? 'Sí' : 'No',
-          participar: ((data[2][i] && this.saldoPremium > 0) || (!data[2][i] && this.saldoStandard > 0)) && participaciones < 5 ? true : false 
+          participar: ((data[2][i] && this.saldoPremium > 0) || (!data[2][i] && this.saldoStandard > 0)) && participaciones < 5 && !experienciaCanjeada && codigoExp == '' ? true : false 
         };
         this.sorteos.push(sorteo);
         console.log(sorteo);
@@ -108,12 +108,14 @@ export class MainComponent implements OnInit {
   comprarTokens(): any {
     console.log('Comprar tokens');
     const dialogRef = this.dialog.open(ComprarTokensComponent, {
-      panelClass: 'comprar-token-dialog-container'
+      panelClass: 'comprar-token-dialog-container',
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {   
         const dialogRef = this.dialog.open(ContractActionResultComponent, {
-          data: result.status
+          data: result.status,
+          disableClose: true
         }); 
         dialogRef.afterOpened().subscribe(_ => {
           setTimeout(() => {
@@ -139,12 +141,14 @@ export class MainComponent implements OnInit {
         tokens: tokens,
         participacionesActuales: participacionesActuales
       },
-      panelClass: 'participar-sorteo-dialog-container'
+      panelClass: 'participar-sorteo-dialog-container',
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
       const dialogRef = this.dialog.open(ContractActionResultComponent, {
-        data: result.status
+        data: result.status,
+        disableClose: true
       }); 
       dialogRef.afterOpened().subscribe(_ => {
         setTimeout(() => {
@@ -157,12 +161,14 @@ export class MainComponent implements OnInit {
 
   registroAnunciante() {
     const dialogRef = this.dialog.open(RegistroAnuncianteComponent, {
-      panelClass: 'anunciante-dialog-container'
+      panelClass: 'anunciante-dialog-container',
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
       const dialogRef = this.dialog.open(ContractActionResultComponent, {
-        data: result.status
+        data: result.status,
+        disableClose: true
       }); 
       dialogRef.afterOpened().subscribe(_ => {
         setTimeout(() => {
@@ -175,12 +181,14 @@ export class MainComponent implements OnInit {
 
   altaSorteo() {
     const dialogRef = this.dialog.open(AltaSorteoComponent, {
-      panelClass: 'alta-sorteo-dialog-container'
+      panelClass: 'alta-sorteo-dialog-container',
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
       const dialogRef = this.dialog.open(ContractActionResultComponent, {
-        data: result.status
+        data: result.status,
+        disableClose: true
       }); 
       dialogRef.afterOpened().subscribe(_ => {
         setTimeout(() => {
@@ -197,12 +205,14 @@ export class MainComponent implements OnInit {
         id: id,
         recaudacion: recaudacion
       },
-      panelClass: 'finalizar-sorteo-dialog-container'
+      panelClass: 'finalizar-sorteo-dialog-container',
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
       const dialogRef = this.dialog.open(ContractActionResultComponent, {
-        data: result.status
+        data: result.status,
+        disableClose: true
       }); 
       dialogRef.afterOpened().subscribe(_ => {
         setTimeout(() => {
@@ -220,12 +230,14 @@ export class MainComponent implements OnInit {
         ganador: ganador,
         codigoExp: codigoExp
       },
-      panelClass: 'canejar-experiencia-dialog-container'
+      panelClass: 'canejar-experiencia-dialog-container',
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
       const dialogRef = this.dialog.open(ContractActionResultComponent, {
-        data: result.status
+        data: result.status,
+        disableClose: true
       }); 
       dialogRef.afterOpened().subscribe(_ => {
         setTimeout(() => {

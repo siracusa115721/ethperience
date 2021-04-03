@@ -1,7 +1,7 @@
 <mat-card class="main-card">
   <mat-card-header>
     <h1 class="title">Información del sorteo</h1>
-    <mat-icon class="close-icon" (click)="closeDialog()">close</mat-icon>
+    <mat-icon *ngIf="!esperandoRespuesta" class="close-icon" (click)="closeDialog()">close</mat-icon>
   </mat-card-header>
   <hr size="2" width="400px" color="#18547F">
   <mat-card-content class="infoContainer" *ngIf="paso == 1">

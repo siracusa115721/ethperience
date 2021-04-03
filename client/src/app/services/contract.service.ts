@@ -23,12 +23,12 @@ export class ContractService {
       if (typeof window.web3 !== 'undefined') {
         this.web3Provider = window.web3.currentProvider;
       } else {
-        this.web3Provider = new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/dfe3e68ffa1d4b8d99666e51ab5537e2');
+        this.web3Provider = new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/9291a84f41aa40edabf85e359feb964d');
       }
   
       const abi = contractABI.abi;
       window.web3 = new Web3(this.web3Provider);
-      this.contractInstance = new window.web3.eth.Contract(abi, '0x95222C900327Aee78557b3F15dCFCB965a1D5470');
+      this.contractInstance = new window.web3.eth.Contract(abi, '0xBF61b106e8bc33B302B9f3FA33DffC530D8c426b');
       console.log(this.contractInstance);
       window.ethereum.enable().then(function(res){
         localStorage.setItem('account', res);
@@ -62,7 +62,7 @@ export class ContractService {
     return res;
   }
 
-  async participar(id: any, tokens, premium) {
+  async participar(id: any, tokens: any, premium: boolean) {
     const res = await this.contractInstance.methods.participar(id, tokens, premium).send({ from: localStorage.getItem('account') });
     return res;
   }

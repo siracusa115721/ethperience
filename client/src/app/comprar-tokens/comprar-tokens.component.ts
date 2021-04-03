@@ -20,6 +20,7 @@ export class ComprarTokensComponent implements OnInit {
   errorMessage: string;
   paso: number;
   esperandoRespuesta: boolean;
+  valido: boolean;
 
   constructor(_cs: ContractService, _dialogRef: MatDialogRef<ComprarTokensComponent>) {
     this.cs = _cs;
@@ -31,6 +32,7 @@ export class ComprarTokensComponent implements OnInit {
     this.tokensPremium = 0;
     this.paso = 1;
     this.esperandoRespuesta = false;
+    this.valido = true;
     this.loadPage();    
   }
 
@@ -52,6 +54,7 @@ export class ComprarTokensComponent implements OnInit {
     }
     this.coste = (this.tokensStandard * this.factorConversionStandard + this.tokensPremium * this.factorConversionPremium).toFixed(4);
     if(+this.coste > +this.balance){
+      this.valido = false;
       this.errorMessage = 'No dispone de saldo suficiente para realizar esta compra'
     }
   }

@@ -82,9 +82,10 @@ contract Sorteos {
     }
     
     function participar(uint256 id, uint256 _tokens, bool _premium) public {
+        uint256 indiceArray = id.sub(1);
         require(_tokens > 0, 'No puede participar con 0 tokens');
         require(_tokens <= 5, 'No puede participar con mas de 5 tokens');
-        require(sorteos[id].premium == _premium, 'El tipo de token que quiere usar no puede usarse en este sorteo');
+        require(sorteos[indiceArray].premium == _premium, 'El tipo de token que quiere usar no puede usarse en este sorteo');
         require(keccak256(abi.encodePacked((anunciantes[msg.sender]))) == keccak256(abi.encodePacked((''))), 'Usted es anunciante, no puede participar en el sorteo.');
         if(_premium == true){
             require(saldoUsuariosPremium[msg.sender] >= _tokens, 'No tiene suficientes tokens para participar');
@@ -140,17 +141,24 @@ contract Sorteos {
                 }else{
                     resultado = string(abi.encodePacked(resultado, '"}##'));
                 }
+            }else{
+                if(i == sorteos.length -1){
+                    resultado = string(abi.encodePacked(resultado,'{}'));
+                }else{
+                    resultado = string(abi.encodePacked(resultado,'{}##'));
+                }
             }
         }
         return (ids, anunciantesArray, premiums, resultado, ganadoresArray);
     }
     
     function finalizarSorteo(uint256 id) public {
+        uint256 indiceArray = id.sub(1);
         require(keccak256(abi.encodePacked((anunciantes[msg.sender]))) != keccak256(abi.encodePacked('')), 'Usted no es anunciante, no puede finalizar el sorteo.');
         address _ganador = getGanador(id);
-        sorteos[id].experiencia.ganador = _ganador;
+        sorteos[indiceArray].experiencia.ganador = _ganador;
         uint256 _codigoExp = block.timestamp;
-        sorteos[id].experiencia.codigoExp = _codigoExp;
+        sorteos[indiceArray].experiencia.codigoExp = _codigoExp;
         
         ganadores[id] = _ganador;
         codigosExperiencias[id] = _codigoExp;
@@ -158,7 +166,8 @@ contract Sorteos {
     }
     
     function canjearExperiencia(uint256 id, uint256 codigoExp) public {
-        require(keccak256(abi.encodePacked((sorteos[id].experiencia.codigoExp))) == keccak256(abi.encodePacked((codigoExp))), 'El codigo introducido no coincide con el esperado');
+        uint256 indiceArray = id.sub(1);
+        require(keccak256(abi.encodePacked((sorteos[indiceArray].experiencia.codigoExp))) == keccak256(abi.encodePacked((codigoExp))), 'El codigo introducido no coincide con el esperado');
         require(experiencias[id][codigoExp] == false, 'No se puede canjear esta experiencia');
         experiencias[id][codigoExp] = true;
     }
